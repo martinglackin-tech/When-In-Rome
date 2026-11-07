@@ -1,0 +1,26 @@
+# Click "Run workflow" on the Actions tab to (re)create the recordings in audio/.
+# Needs a repository secret called GOOGLE_TTS_API_KEY.
+name: Generate audio
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/generate-audio.mjs
+        env:
+          GOOGLE_TTS_API_KEY: ${{ secrets.GOOGLE_TTS_API_KEY }}
+      - name: Save the recordings
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add audio
+          git diff --cached --quiet || git commit -m "Generate Italian audio"
+          git push
