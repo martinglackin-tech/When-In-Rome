@@ -1,0 +1,74 @@
+{
+  "Buongiorno": {
+    "normal": "e31be3a03bf1.mp3",
+    "slow": "523839cae735.mp3"
+  },
+  "Grazie": {
+    "normal": "27107a49923b.mp3",
+    "slow": "9d12c317fed0.mp3"
+  },
+  "Per favore": {
+    "normal": "d1b04140b2c2.mp3",
+    "slow": "57771cfb0d9d.mp3"
+  },
+  "Mi scusi": {
+    "normal": "063c1cfe0f9c.mp3",
+    "slow": "1f9ecdc9c037.mp3"
+  },
+  "Sì. No.": {
+    "normal": "5fe3f7f377fc.mp3",
+    "slow": "11dec94b5d60.mp3"
+  },
+  "Parla inglese?": {
+    "normal": "1f2720df156d.mp3",
+    "slow": "0cb6752a7873.mp3"
+  },
+  "Dov'è il bagno?": {
+    "normal": "2dbd66a92c91.mp3",
+    "slow": "3aa36e883bae.mp3"
+  },
+  "Un tavolo per uno, per favore": {
+    "normal": "f89748298e1d.mp3",
+    "slow": "bcbf3b41cdaa.mp3"
+  },
+  "Il menù, per favore": {
+    "normal": "2eb6a2a098da.mp3",
+    "slow": "5367e91e49a1.mp3"
+  },
+  "Prendo questo, per favore": {
+    "normal": "f418df928a23.mp3",
+    "slow": "6a3bededf20c.mp3"
+  },
+  "Senza cipolla, per favore": {
+    "normal": "8ced9fa4f452.mp3",
+    "slow": "bb71f68b07b9.mp3"
+  },
+  "Acqua, per favore": {
+    "normal": "aa3a72aaf7d2.mp3",
+    "slow": "301dbf1affb0.mp3"
+  },
+  "Una birra, per favore": {
+    "normal": "12bdd283fff4.mp3",
+    "slow": "75130d34b13c.mp3"
+  },
+  "È delizioso!": {
+    "normal": "038cb81b9262.mp3",
+    "slow": "48f273a2755a.mp3"
+  },
+  "Salute!": {
+    "normal": "dfdef6f0fbd4.mp3",
+    "slow": "2dbfc568be96.mp3"
+  },
+  "Il conto, per favore": {
+    "normal": "4491d756dba1.mp3",
+    "slow": "27a3e399d2e0.mp3"
+  },
+  "Sono del Regno Unito": {
+    "normal": "a8934432a22c.mp3",
+    "slow": "8671776b4954.mp3"
+  },
+  "Mi chiamo Martyn": {
+    "normal": "cf637604e9b5.mp3",
+    "slow": "748ff412c3fa.mp3"
+  }
+}
