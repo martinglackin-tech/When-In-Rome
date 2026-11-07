@@ -156,7 +156,7 @@
     // ---------- Pieces ----------
     const icon = (d) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
     const ICON = {
-        say: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="9" width="3.4" height="6" rx="1.7"/><rect x="7.2" y="4" width="3.4" height="16" rx="1.7"/><rect x="12.4" y="7" width="3.4" height="10" rx="1.7"/><rect x="17.6" y="10" width="3.4" height="4" rx="1.7"/></svg>',
+        say: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="9" width="3.4" height="6"/><rect x="7.2" y="4" width="3.4" height="16"/><rect x="12.4" y="7" width="3.4" height="10"/><rect x="17.6" y="10" width="3.4" height="4"/></svg>',
         show: icon('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'),
         check: icon('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
         cross: icon('<path d="M6 6l12 12M18 6L6 18"/>')
@@ -169,29 +169,50 @@
         for (const [v, r] of map) while (n >= v) { out += r; n -= v; }
         return out;
     }
-    const numeral = (n, label) => `<div class="numeral"><span class="rn" aria-hidden="true">${roman(n)}</span><span class="small">${esc(label)}</span></div>`;
-    const viewHead = (title, sub) => `<header class="viewhead"><h1>${esc(title)}</h1><p class="small">${esc(sub)}</p></header>`;
+    // The invitation card's corners, bitten out in the table colour.
+    const BITES = '<i class="bite tl" aria-hidden="true"></i><i class="bite tr" aria-hidden="true"></i><i class="bite bl" aria-hidden="true"></i><i class="bite br" aria-hidden="true"></i>';
+    const viewHead = (title, sub) => `<header class="viewhead"><h1>${esc(title)}</h1><p>${esc(sub)}</p></header>`;
 
     // ---------- Phrases ----------
     function phraseRow(p, i) {
         return `<li class="row" style="--i:${i}">
-            <div class="txt"><div class="cz" lang="it">${esc(p.italian)}</div><div class="snd">${esc(p.sound)}</div><div class="en">${esc(p.english)}</div></div>
+            <div class="txt"><div class="it" lang="it">${esc(p.italian)}</div><div class="snd">${esc(p.sound)}</div><div class="en">${esc(p.english)}</div></div>
             <button class="ib say" type="button" data-say="${p.id}" aria-label="Say: ${esc(p.english)}">${ICON.say}</button>
             <button class="ib" type="button" data-show="${p.id}" aria-label="Show full screen: ${esc(p.english)}">${ICON.show}</button>
         </li>`;
     }
     function renderPhrases() {
         let n = 0;
-        main.innerHTML = `<section class="slip hero">
-                <p class="kicker">Italian for Martyn · Roma</p>
-                <h1>When In Rome</h1>
-                <p class="lead">Tap a phrase to hear it. Hold the screen up to show it to someone.</p>
-                ${numeral(phrases.length, phrases.length + ' phrases')}
-            </section>` + categoryOrder.map(key => {
-            const c = categories[key];
-            const items = phrases.filter(p => p.category === key);
-            return `<section class="slip"><h2><span class="sec" aria-hidden="true">${c.latin}</span>${c.name}</h2><ul class="rows">${items.map(p => phraseRow(p, n++)).join('')}</ul></section>`;
-        }).join('') + `<section class="field"><p><span class="first">Italian is said exactly as it is spelt.</span> Sound every vowel, hold double letters a beat longer, and lean on the capitals.</p></section>`;
+        const n18 = phrases.length;
+        main.innerHTML = `<section class="card-obj hero">${BITES}
+                <div><h1>When<br>In Rome</h1>
+                <p class="lead">Italian for Martyn, travelling solo to Rome.</p></div>
+                <div class="count"><span class="rn" aria-hidden="true">${roman(n18)}</span><span class="small">${n18} phrases to hear, show and practise</span></div>
+            </section>
+            <section class="menu" aria-labelledby="menu-h">
+                <header><h2 id="menu-h">The phrases</h2><p class="small">Tap the blue square to hear one. Tap the corners to show it full screen.</p></header>
+                ${categoryOrder.map(key => {
+                    const items = phrases.filter(p => p.category === key).sort((x, y) => x.id - y.id);
+                    return `<div class="group"><h3>${categories[key].name}</h3><ul class="rows">${items.map(p => phraseRow(p, n++)).join('')}</ul></div>`;
+                }).join('')}
+            </section>
+            <section class="how" aria-labelledby="how-h">
+                <h2 id="how-h">How it works</h2>
+                <p>Italian is said as it is spelt: sound every vowel, hold double letters a beat longer and lean on the capitals.</p>
+                <div class="slip">
+                    <p class="shop">Bar When In Rome</p>
+                    <p class="small">Pay at the till, hand the scontrino to the barista</p>
+                    <h3>At the table</h3>
+                    <p class="line"><span>Hear a phrase</span><span class="dots"></span><b>Blue square</b></p>
+                    <p class="line"><span>Show the waiter</span><span class="dots"></span><b>Corners</b></p>
+                    <p class="line"><span>Turn it to face them</span><span class="dots"></span><b>Turn round</b></p>
+                    <h3>Before you go</h3>
+                    <p class="line"><span>Practise</span><span class="dots"></span><b>Cards</b></p>
+                    <p class="line"><span>Test yourself</span><span class="dots"></span><b>Quiz</b></p>
+                    <p class="line"><span>Hear it slowly</span><span class="dots"></span><b>Speed</b></p>
+                    <p class="total"><span>Totale</span><span>${n18} phrases</span></p>
+                </div>
+            </section>`;
         main.onclick = (e) => {
             const b = e.target.closest('button'); if (!b) return;
             if (b.dataset.say) speak(sayOf(phrases.find(p => p.id == b.dataset.say)), b);
@@ -208,15 +229,15 @@
         const p = phrases[cardIdx];
         main.innerHTML = viewHead('Flashcards', `Card ${cardIdx + 1} of ${phrases.length}. Tap the card to turn it over.`) + `
         <div class="scene"><button class="card${flipped ? ' flipped' : ''}" type="button" data-act="flip" aria-label="${cardLabel(p, flipped)}">
-            <div class="face front"><div class="big">${esc(p.english)}</div><div class="small hint">How do you say it in Italian?</div></div>
-            <div class="face back"><div class="big" lang="it">${esc(p.italian)}</div><div class="snd">${esc(p.sound)}</div></div>
+            <div class="face front card-obj">${BITES}<div class="big">${esc(p.english)}</div><div class="small hint">How do you say it in Italian?</div></div>
+            <div class="face back card-obj">${BITES}<div class="big" lang="it">${esc(p.italian)}</div><div class="snd">${esc(p.sound)}</div></div>
         </button></div>
-        <div class="btns">
+        <div class="btns on-ground">
             <button class="btn" type="button" data-act="prev">Back</button>
             <button class="btn primary" type="button" data-act="say">${ICON.say}Say it</button>
             <button class="btn" type="button" data-act="next">Next</button>
         </div>
-        <div class="btns"><button class="btn" type="button" data-act="shuffle">Shuffle the deck</button></div>`;
+        <div class="btns on-ground"><button class="btn" type="button" data-act="shuffle">Shuffle the deck</button></div>`;
         main.onclick = (e) => {
             const b = e.target.closest('button'); if (!b) return;
             const a = b.dataset.act;
@@ -249,16 +270,16 @@
         if (!quiz) startQuiz();
         if (quiz.i >= quiz.qs.length) {
             const n = quiz.qs.length, s = quiz.score;
-            main.innerHTML = `<section class="slip result"><div class="numeral"><span class="rn" aria-hidden="true">${roman(s)}<span class="of">/${roman(n)}</span></span></div>
-                <h1 style="font-size:var(--step-head)">${s} out of ${n}</h1>
+            main.innerHTML = `<section class="card-obj result">${BITES}<p class="rn" aria-hidden="true">${roman(s)}<span> / ${roman(n)}</span></p>
+                <h1>${s} out of ${n}</h1>
                 <p class="lead">${s === n ? 'Perfetto! Not a word wrong.' : s >= n * 0.7 ? 'Molto bene! Very good.' : 'Rome wasn\'t built in a day. Try again.'}</p></section>
-                <div class="btns"><button class="btn primary" type="button" data-act="again">Play again</button></div>`;
+                <div class="btns on-ground"><button class="btn primary" type="button" data-act="again">Play again</button></div>`;
         } else {
             const q = quiz.qs[quiz.i];
-            main.innerHTML = `<p class="progress small">Question ${quiz.i + 1} of ${quiz.qs.length}. ${quiz.score} right so far.</p>
+            main.innerHTML = `<p class="progress">Question ${quiz.i + 1} of ${quiz.qs.length}. ${quiz.score} right so far.</p>
                 <h1 class="q">${esc(q.p.english)}</h1>
                 ${q.options.map((o, k) => `<button class="opt" type="button" data-k="${k}" lang="it"><span>${esc(o.italian)}</span></button>`).join('')}
-                <div class="btns" id="after" hidden><button class="btn" type="button" data-act="say">${ICON.say}Hear it</button><button class="btn primary" type="button" data-act="next">Next</button></div>`;
+                <div class="btns on-ground" id="after" hidden><button class="btn" type="button" data-act="say">${ICON.say}Hear it</button><button class="btn primary" type="button" data-act="next">Next</button></div>`;
         }
         main.onclick = (e) => {
             const b = e.target.closest('button'); if (!b) return;
@@ -285,6 +306,7 @@
     const views = { phrases: renderPhrases, cards: renderCards, quiz: renderQuiz };
     function go(tab) {
         document.querySelectorAll('nav.tabs button[data-tab]').forEach(b => b.setAttribute('aria-current', String(b.dataset.tab === tab)));
+        document.body.dataset.view = tab;
         views[tab](); window.scrollTo(0, 0);
         try { localStorage.setItem('wir_tab', tab); } catch (e) {}
     }

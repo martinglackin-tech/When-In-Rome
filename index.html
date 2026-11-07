@@ -7,155 +7,184 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="When In Rome">
-    <meta name="theme-color" content="#e7dcc6">
+    <meta name="theme-color" content="#062b8a">
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-    <link rel="preload" href="fonts/hanken-400.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/schibsted-grotesk-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
     <title>When In Rome</title>
     <style>
-        @font-face { font-family: "Hanken Grotesk"; font-weight: 400; font-display: swap; src: url(fonts/hanken-400.ttf) format("truetype"); }
-        @font-face { font-family: "Hanken Grotesk"; font-weight: 500; font-display: swap; src: url(fonts/hanken-500.ttf) format("truetype"); }
-        @font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-display: swap; src: url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); }
-        @font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-display: swap; src: url(fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2"); }
+        @font-face { font-family: "Schibsted Grotesk"; font-weight: 400; font-display: swap; src: url(fonts/schibsted-grotesk-latin-400-normal.woff2) format("woff2"); }
+        @font-face { font-family: "Schibsted Grotesk"; font-weight: 600; font-display: swap; src: url(fonts/schibsted-grotesk-latin-600-normal.woff2) format("woff2"); }
+        @font-face { font-family: "Schibsted Grotesk"; font-weight: 800; font-display: swap; src: url(fonts/schibsted-grotesk-latin-800-normal.woff2) format("woff2"); }
 
-        /* Travertine and terracotta: warm stone for the page, cut tablets of paper, one terracotta for actions. */
+        /* Cobalt on sand: a two-colour print job. Sand paper lies on a cobalt table; every word on the paper is cobalt. */
         :root {
-            --bg: #e7dcc6; --surface: #dacbaf; --paper: #f5eee0; --rule: #d9cbb0;
-            --ink: #2b211b; --muted: #65564a;
-            --accent: #9c3d26; --accent-ink: #fff;
-            --field: #4a2a1d; --field-ink: #f5eee0;
-            --serif: "Cormorant Garamond", "Iowan Old Style", Palatino, Georgia, serif;
-            --radius: 10px; --gutter: 16px;
-            --step-small: .875rem; --step-body: 1.0625rem; --step-lead: 1.375rem;
-            --step-phrase: 1.75rem;
-            --step-head: clamp(2.6rem, 1.7rem + 4vw, 3.9rem);
-            --step-hero: clamp(3.6rem, 2.2rem + 7vw, 5.8rem);
+            --ground: #062b8a; --ground-2: #143a9c; --on-ground: #e6dbc7;
+            --paper: #e6dbc7; --paper-2: #ddd0b9; --ink: #062b8a; --muted: #3a5aa8;
+            --gutter: 16px;
+            --step-small: .875rem;
+            --step-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+            --step-lead: clamp(1.25rem, 1.1rem + .7vw, 1.625rem);
+            --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+            --step-hero: clamp(3rem, 13vw, 5.5rem);
+            --zig: polygon(0 0, 100% 0, 100% 100%, 95.455% calc(100% - 9px), 90.909% 100%, 86.364% calc(100% - 9px), 81.818% 100%, 77.273% calc(100% - 9px), 72.727% 100%, 68.182% calc(100% - 9px), 63.636% 100%, 59.091% calc(100% - 9px), 54.545% 100%, 50% calc(100% - 9px), 45.455% 100%, 40.909% calc(100% - 9px), 36.364% 100%, 31.818% calc(100% - 9px), 27.273% 100%, 22.727% calc(100% - 9px), 18.182% 100%, 13.636% calc(100% - 9px), 9.091% 100%, 4.545% calc(100% - 9px), 0 100%);
+            /* Scalloped top and bottom edges for the menu sheet, cut with an SVG mask. */
+            --scallop-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 12A12 12 0 0 1 24 12Z'/%3E%3C/svg%3E");
+            --scallop-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 0A12 12 0 0 0 24 0Z'/%3E%3C/svg%3E");
+            --solid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8'/%3E%3C/svg%3E");
         }
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1c1613; --surface: #2d241f; --paper: #362b25; --rule: #4a3c33;
-                --ink: #f0e6d5; --muted: #bfae98;
-                --accent: #e2906a; --accent-ink: #26120a;
-                --field: #4a2a1d; --field-ink: #f5eee0;
-            }
+            :root { --ground: #041d5e; --ground-2: #0b2a7a; --paper: #d9cdb6; --paper-2: #cdbfa5; --on-ground: #d9cdb6; }
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { background: var(--bg); }
-        body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--step-body)/1.45 "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: -.005em; }
+        html { background: var(--ground); }
+        body { margin: 0; background: var(--ground); color: var(--on-ground); font: 400 var(--step-body)/1.4 "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: -.01em; }
         button { font: inherit; letter-spacing: inherit; color: inherit; }
         svg { display: block; flex: none; }
-        :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-
-        main { max-width: 560px; margin: 0 auto; padding: calc(var(--gutter) + env(safe-area-inset-top)) var(--gutter) calc(112px + env(safe-area-inset-bottom)); }
-
-        /* Type: a carved serif for Italian and headings, a plain sans for everything you read in English. */
-        h1 { font-family: var(--serif); font-weight: 600; font-size: var(--step-hero); line-height: .92; letter-spacing: -.02em; margin: 0; text-wrap: balance; font-variant-numeric: lining-nums; }
-        h2 { font-weight: 500; font-size: var(--step-small); line-height: 1.2; letter-spacing: .14em; text-transform: uppercase; margin: 0; display: flex; align-items: baseline; gap: 12px; color: var(--muted); }
-        h2 .sec { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; letter-spacing: .04em; color: var(--accent); text-transform: none; }
+        :focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
         p { margin: 0; }
-        .lead { font-size: var(--step-lead); line-height: 1.25; letter-spacing: -.015em; }
-        .small { font-size: var(--step-small); color: var(--muted); }
-        .kicker { font-size: var(--step-small); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
 
-        /* Tablets: paper laid on stone. The first one is an arch. */
-        .slip { background: var(--paper); border-radius: var(--radius); padding: 26px 22px 12px; margin-bottom: 14px; }
-        .hero { border-radius: 999px 999px var(--radius) var(--radius); padding: 72px 26px 30px; text-align: center; }
-        .hero h1 { margin: 0 auto; }
-        .hero p.lead { margin: 20px auto 0; max-width: 23ch; color: var(--muted); }
-        .numeral { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .numeral .rn { font-family: var(--serif); font-weight: 600; font-size: 2.6rem; line-height: 1; letter-spacing: .14em; color: var(--accent); padding: 10px 4px 6px 18px; border-block: 2px solid var(--rule); }
-        .numeral .rn .of { color: var(--muted); font-size: .6em; letter-spacing: .1em; }
-        .viewhead { padding: 8px 6px 24px; }
-        .viewhead h1 { font-size: var(--step-head); }
-        .viewhead .small { margin-top: 10px; font-size: var(--step-body); }
+        main { background: var(--ground); max-width: 600px; margin: 0 auto; padding: calc(28px + env(safe-area-inset-top)) var(--gutter) 64px; }
+        body[data-view="phrases"] main { max-width: none; }
+        body[data-view="phrases"] main > * { max-width: 568px; margin-left: auto; margin-right: auto; }
 
-        .slip h2 { margin-bottom: 6px; }
+        h1, h2, .display { font-weight: 800; letter-spacing: -.05em; line-height: .88; margin: 0; text-wrap: balance; }
+        h1 { font-size: var(--step-hero); }
+        h2 { font-size: var(--step-head); }
+        .small { font-size: var(--step-small); }
+        .lead { font-size: var(--step-lead); line-height: 1.25; letter-spacing: -.02em; text-wrap: balance; }
+
+        /* The invitation card: paper with its corners bitten out in the table colour. */
+        .card-obj { position: relative; background: var(--paper); color: var(--ink); overflow: hidden; }
+        .card-obj > .bite { position: absolute; width: 36px; height: 36px; border-radius: 50%; background: var(--ground); }
+        .bite.tl { top: -18px; left: -18px; } .bite.tr { top: -18px; right: -18px; }
+        .bite.bl { bottom: -18px; left: -18px; } .bite.br { bottom: -18px; right: -18px; }
+
+        .hero { aspect-ratio: 5 / 6; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; padding: 56px 28px 44px; margin-bottom: 40px; }
+        .hero h1 { white-space: nowrap; }
+        .hero .lead { max-width: 22ch; margin-top: 22px; }
+        .hero .count { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .hero .count .rn { font-weight: 800; font-size: var(--step-hero); letter-spacing: .01em; line-height: .9; }
+        .hero .count .small { font-weight: 600; }
+
+        /* The menu sheet: one tall sheet, scalloped top and bottom, set centred like a trattoria menu. */
+        .menu { background: var(--paper); color: var(--ink); padding: 52px 24px 56px;
+            -webkit-mask: var(--scallop-top) top left / 24px 12px repeat-x, var(--solid) center / 100% calc(100% - 22px) no-repeat, var(--scallop-bottom) bottom left / 24px 12px repeat-x;
+                    mask: var(--scallop-top) top left / 24px 12px repeat-x, var(--solid) center / 100% calc(100% - 22px) no-repeat, var(--scallop-bottom) bottom left / 24px 12px repeat-x; }
+        .menu > header { text-align: center; }
+        .menu > header .small { margin-top: 12px; font-size: var(--step-body); }
+        .group { margin-top: 56px; }
+        .group h3 { text-align: center; font-weight: 800; font-size: var(--step-lead); letter-spacing: -.03em; margin: 0 0 8px; }
         .rows { list-style: none; margin: 0; padding: 0; }
-        .row { display: flex; align-items: center; gap: 10px; padding: 18px 0; border-top: 1px solid var(--rule); animation: rise .5s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 40ms); }
-        .row:first-child { border-top: 0; }
+        .row { display: flex; align-items: center; gap: 10px; padding: 14px 0; animation: rise .5s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 40ms); }
         .row .txt { flex: 1; min-width: 0; }
-        .cz { font-family: var(--serif); font-weight: 600; font-size: var(--step-phrase); line-height: 1.08; letter-spacing: -.01em; }
-        .snd { color: var(--accent); font-size: var(--step-small); font-weight: 500; margin-top: 4px; }
+        .it { font-weight: 800; font-size: var(--step-lead); line-height: 1.08; letter-spacing: -.03em; }
+        .snd { font-weight: 600; font-size: var(--step-small); margin-top: 4px; }
         .en { color: var(--muted); font-size: var(--step-small); margin-top: 1px; }
 
-        /* Buttons: one shape. */
-        .ib { flex: none; width: 48px; height: 48px; border-radius: var(--radius); border: 0; background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: transform .12s; }
-        .ib.say { background: var(--accent); color: var(--accent-ink); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: var(--radius); background: var(--surface); color: var(--ink); min-height: 52px; padding: 0 20px; font-weight: 500; cursor: pointer; transition: transform .12s; }
-        .btn.primary { background: var(--accent); color: var(--accent-ink); }
-        .ib:active, .btn:active, .opt:active { transform: scale(.95); }
+        /* Buttons: one shape, square. */
+        .ib { flex: none; width: 48px; height: 48px; border: 0; border-radius: 0; background: var(--paper-2); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: transform .12s, background-color .15s; }
+        .ib.say { background: var(--ink); color: var(--paper); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 0; background: var(--paper-2); color: var(--ink); min-height: 52px; padding: 0 20px; font-weight: 600; cursor: pointer; transition: transform .12s, background-color .15s; }
+        .btn.primary { background: var(--paper); color: var(--ink); }
+        .on-ground .btn { background: var(--ground-2); color: var(--on-ground); }
+        .on-ground .btn.primary { background: var(--paper); color: var(--ink); }
+        @media (hover: hover) { .ib:hover, .btn:hover { filter: brightness(1.06); } }
+        .ib:active, .btn:active, .opt:active, .tabs button:active { transform: scale(.95); }
         .btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
         .btns .btn { flex: 1 1 auto; }
 
-        /* The tip at the end: a block of dark umber. */
-        .field { background: var(--field); color: var(--field-ink); padding: 32px 24px 36px; margin: 8px 0 0; border-radius: var(--radius); }
-        .field p { font-size: var(--step-lead); line-height: 1.3; letter-spacing: -.015em; max-width: 28ch; }
-        .field .first { font-family: var(--serif); font-weight: 600; font-size: 1.6rem; line-height: 1.1; display: block; margin-bottom: 8px; letter-spacing: 0; }
+        /* How it works: the bar scontrino, zigzag at the foot, dot leaders between what and where. */
+        .how { margin-top: 72px; }
+        .how > h2 { color: var(--on-ground); }
+        .how > p { margin: 18px 0 28px; max-width: 32ch; }
+        .slip { background: var(--paper); color: var(--ink); clip-path: var(--zig); padding: 26px 22px 44px; }
+        .slip .shop { text-align: center; font-weight: 800; font-size: var(--step-lead); letter-spacing: -.03em; }
+        .slip .shop + .small { text-align: center; color: var(--muted); margin-top: 2px; }
+        .slip h3 { font-weight: 800; font-size: var(--step-body); margin: 28px 0 6px; letter-spacing: -.01em; }
+        .slip .line { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; }
+        .slip .line .dots { flex: 1; border-bottom: 4px dotted var(--muted); transform: translateY(-4px); min-width: 16px; }
+        .slip .line b { font-weight: 600; }
+        .slip .total { display: flex; justify-content: space-between; align-items: center; background: var(--ink); color: var(--paper); min-height: 44px; padding: 0 12px; margin: 28px 0 0; font-weight: 800; font-variant-numeric: tabular-nums; }
 
-        /* Flashcard: a two-sided card that turns over. */
+        /* The back of the object: a sand field to close the page. */
+        .curtain { background: var(--paper); color: var(--ink); padding: 72px var(--gutter) calc(120px + env(safe-area-inset-bottom)); text-align: center; }
+        .curtain .display { font-size: var(--step-head); }
+        .curtain p.lead { margin-top: 14px; }
+        body:not([data-view="phrases"]) .curtain { display: none; }
+        body:not([data-view="phrases"]) main { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+
+        /* Views for practice */
+        .viewhead { padding: 0 2px 24px; }
+        .viewhead p { margin-top: 12px; }
+
+        /* Flashcard: an invitation card that turns over. */
         .scene { perspective: 1400px; margin-bottom: 8px; animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
-        .card { display: grid; width: 100%; min-height: 340px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,.2,.2,1); }
+        .card { display: grid; width: 100%; min-height: 360px; padding: 0; border: 0; background: none; font: inherit; text-align: center; cursor: pointer; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,.2,.2,1); }
         .card.flipped { transform: rotateY(180deg); }
-        .card .face { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; background: var(--paper); border-radius: var(--radius); border-top: 6px solid var(--accent); padding: 28px 24px 40px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .card .face.back { transform: rotateY(180deg); border-top-color: var(--ink); }
-        .card .big { font-family: var(--serif); font-weight: 600; font-size: var(--step-head); line-height: 1; letter-spacing: -.015em; }
-        .card .front .big { font-family: inherit; font-weight: 500; font-size: clamp(1.9rem, 1.4rem + 2.4vw, 2.6rem); line-height: 1.1; letter-spacing: -.03em; }
-        .card .snd { font-size: var(--step-lead); margin-top: 6px; }
-        .card .hint { margin-top: 18px; }
+        .card .face { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 40px 28px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .card .face.back { transform: rotateY(180deg); }
+        .card .big { font-weight: 800; font-size: var(--step-head); line-height: .95; letter-spacing: -.045em; text-wrap: balance; }
+        .card .snd { font-size: var(--step-lead); }
+        .card .hint { color: var(--muted); font-size: var(--step-small); }
 
         /* Quiz */
-        .q { font-family: inherit; font-weight: 500; font-size: clamp(2rem, 1.4rem + 3vw, 2.9rem); line-height: 1.04; letter-spacing: -.035em; margin: 0 0 22px; padding: 0 6px; }
-        .opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 64px; text-align: left; border: 0; border-radius: var(--radius); background: var(--paper); color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 1.6rem; line-height: 1.1; padding: 12px 18px; margin: 0 0 8px; cursor: pointer; transition: transform .12s; }
-        .opt.right { background: var(--accent); color: var(--accent-ink); }
-        .opt.wrong { background: var(--ink); color: var(--bg); }
+        .q { font-size: var(--step-head); margin: 0 0 24px; padding: 0 2px; }
+        .opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 64px; text-align: left; border: 0; border-radius: 0; background: var(--paper); color: var(--ink); font-weight: 800; font-size: var(--step-lead); letter-spacing: -.03em; line-height: 1.1; padding: 12px 18px; margin: 0 0 8px; cursor: pointer; transition: transform .12s, opacity .2s; }
+        .opt.wrong { background: var(--ground-2); color: var(--on-ground); }
         .opt:disabled { cursor: default; }
-        .opt:disabled:not(.right):not(.wrong) { opacity: .55; }
-        .progress { padding: 0 6px 12px; }
-        .result { text-align: center; padding: 34px 22px 30px; }
-        .result .numeral { margin: 0 0 22px; }
-        .result .numeral .rn { font-size: 3.4rem; }
-        .result .lead { margin: 14px auto 0; max-width: 24ch; color: var(--muted); }
+        .opt:disabled:not(.right):not(.wrong) { opacity: .45; }
+        .progress { padding: 0 2px 12px; }
+        .result { text-align: center; padding: 56px 28px 48px; }
+        .result .rn { font-weight: 800; font-size: var(--step-hero); letter-spacing: 0; line-height: 1; }
+        .result .rn span { font-size: .6em; }
+        .result h1 { font-size: var(--step-head); margin-top: 18px; }
+        .result .lead { margin: 16px auto 0; max-width: 22ch; color: var(--muted); }
 
-        /* Tab bar */
-        nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--bg); padding: 8px var(--gutter) calc(8px + env(safe-area-inset-bottom)); }
-        nav.tabs .in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--surface); border-radius: calc(var(--radius) + 4px); padding: 6px; }
-        nav.tabs button { display: flex; flex-direction: column; align-items: center; gap: 3px; border: 0; background: none; border-radius: var(--radius); padding: 9px 0 7px; font-size: var(--step-small); font-weight: 500; color: var(--muted); cursor: pointer; transition: transform .12s; }
-        nav.tabs button:active { transform: scale(.95); }
-        nav.tabs button[aria-current="true"] { background: var(--ink); color: var(--bg); }
+        /* Tab bar: a sand strip, the chosen tab printed solid. */
+        nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--paper); padding: 6px var(--gutter) calc(6px + env(safe-area-inset-bottom)); }
+        nav.tabs .in { max-width: 568px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        nav.tabs button { display: flex; flex-direction: column; align-items: center; gap: 3px; border: 0; background: none; border-radius: 0; padding: 9px 0 7px; font-size: var(--step-small); font-weight: 600; color: var(--ink); cursor: pointer; transition: transform .12s, background-color .15s; }
+        nav.tabs button[aria-current="true"] { background: var(--ink); color: var(--paper); }
 
-        /* Full-screen phrase: the tablet you hold up to the waiter. Always light, for legibility. */
-        .overlay { position: fixed; inset: 0; z-index: 50; background: #f5eee0; color: #2b211b; display: none; flex-direction: column; height: 100dvh; }
+        /* Full-screen phrase: the paper you hold up to the waiter. Always the light print, for legibility. */
+        .overlay { position: fixed; inset: 0; z-index: 50; background: #e6dbc7; color: #062b8a; display: none; flex-direction: column; height: 100dvh; }
         .overlay.on { display: flex; }
-        .overlay .top { height: 12px; background: #9c3d26; flex: none; }
+        .overlay .top { height: 12px; background: #062b8a; flex: none; }
         .overlay .bar { display: flex; gap: 8px; justify-content: flex-end; padding: max(12px, env(safe-area-inset-top)) 16px 8px; flex: none; }
-        .overlay .bar .btn { background: #e7dcc6; color: #2b211b; min-height: 48px; padding: 0 16px; }
+        .overlay .bar .btn { background: #ddd0b9; color: #062b8a; min-height: 48px; padding: 0 16px; }
         .overlay .body { flex: 1; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 16px 24px 40px; transition: transform .3s; }
         .overlay .body.flip { transform: rotate(180deg); }
-        .ov-cz { font-family: var(--serif); font-weight: 600; font-size: clamp(3rem, 15vw, 6.2rem); line-height: .98; letter-spacing: -.01em; overflow-wrap: break-word; }
-        .ov-sub { margin-top: 24px; font-size: clamp(1.25rem, 5vw, 1.75rem); color: #8a3520; font-weight: 500; letter-spacing: -.015em; }
-        .ov-en { margin-top: 8px; font-size: clamp(1.0625rem, 4vw, 1.375rem); color: #65564a; }
-        #toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: var(--radius); font-size: var(--step-small); opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 60; width: max-content; max-width: calc(100vw - 32px); text-align: center; }
+        .ov-cz { font-weight: 800; font-size: clamp(2.75rem, 14vw, 6rem); line-height: .95; letter-spacing: -.05em; overflow-wrap: break-word; }
+        .ov-sub { margin-top: 24px; font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 600; letter-spacing: -.015em; }
+        .ov-en { margin-top: 8px; font-size: clamp(1.0625rem, 4vw, 1.375rem); color: #3a5aa8; }
+        #toast { position: fixed; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 10px 18px; font-size: var(--step-small); font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 60; width: max-content; max-width: calc(100vw - 32px); text-align: center; }
         #toast.on { opacity: 1; }
 
-        .speaking { outline: 3px solid var(--accent); outline-offset: 2px; }
+        .speaking { outline: 3px solid var(--ink); outline-offset: 2px; }
         @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
         @media (prefers-reduced-motion: reduce) {
             .row, .scene { animation: none; }
             .card { transition: none; }
             * { transition: none !important; }
         }
-        @media (min-width: 700px) { main { padding-top: 48px; } .slip { padding: 30px 32px 14px; } .hero { padding: 96px 40px 36px; } .field { padding: 40px 32px; } }
+        @media (min-width: 700px) { main { padding-top: 56px; } .menu { padding: 64px 56px 68px; } .hero { padding: 72px 48px 56px; } }
     </style>
 </head>
 <body class="notranslate" translate="no">
     <main id="main"></main>
 
+    <footer class="curtain">
+        <p class="display">Buon viaggio, Martyn.</p>
+        <p class="lead">Have a good trip.</p>
+    </footer>
+
     <nav class="tabs" aria-label="Sections">
         <div class="in">
-            <button type="button" data-tab="phrases"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H10l-6 4z"/></svg>Phrases</button>
-            <button type="button" data-tab="cards"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h13v11H3zM8 5h13v11"/></svg>Cards</button>
-            <button type="button" data-tab="quiz"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>Quiz</button>
+            <button type="button" data-tab="phrases"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H10l-6 4z"/></svg>Phrases</button>
+            <button type="button" data-tab="cards"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h13v11H3zM8 5h13v11"/></svg>Cards</button>
+            <button type="button" data-tab="quiz"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>Quiz</button>
             <button type="button" id="speed" aria-pressed="false" aria-label="Speech speed"></button>
         </div>
     </nav>
@@ -164,8 +193,8 @@
     <div id="ov-phrase" class="overlay" role="dialog" aria-modal="true" aria-label="Phrase, full screen">
         <div class="top"></div>
         <div class="bar">
-            <button type="button" class="btn" id="ov-say"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="9" width="3.4" height="6" rx="1.7"/><rect x="7.2" y="4" width="3.4" height="16" rx="1.7"/><rect x="12.4" y="7" width="3.4" height="10" rx="1.7"/><rect x="17.6" y="10" width="3.4" height="4" rx="1.7"/></svg>Say it</button>
-            <button type="button" class="btn" data-flip><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0114-5.3L20 9M20 4v5h-5M20 12a8 8 0 01-14 5.3L4 15M4 20v-5h5"/></svg>Turn round</button>
+            <button type="button" class="btn" id="ov-say"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="9" width="3.4" height="6"/><rect x="7.2" y="4" width="3.4" height="16"/><rect x="12.4" y="7" width="3.4" height="10"/><rect x="17.6" y="10" width="3.4" height="4"/></svg>Say it</button>
+            <button type="button" class="btn" data-flip><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0114-5.3L20 9M20 4v5h-5M20 12a8 8 0 01-14 5.3L4 15M4 20v-5h5"/></svg>Turn round</button>
             <button type="button" class="btn" data-close>Close</button>
         </div>
         <div class="body" data-body>
@@ -177,7 +206,7 @@
 
     <div id="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=1"></script>
-    <script src="app.js?v=1"></script>
+    <script src="data.js?v=2"></script>
+    <script src="app.js?v=2"></script>
 </body>
 </html>

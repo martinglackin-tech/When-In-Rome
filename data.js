@@ -1,9 +1,9 @@
 // Phrasebook content. `say` is what the voice reads aloud.
 (function () {
     const categories = {
-        essentials: { name: "Essentials", latin: "I" },
-        dining: { name: "Eating & Drinking", latin: "II" },
-        about: { name: "About Me", latin: "III" }
+        essentials: { name: "Essentials" },
+        dining: { name: "Eating & Drinking" },
+        about: { name: "About Me" }
     };
     const categoryOrder = ["essentials", "dining", "about"];
 

@@ -2,7 +2,7 @@
 
 An Italian phrasebook for Martyn's solo trip to Rome. It's a small web app that works offline: you can hear each phrase, show it full screen to a waiter, practise with flashcards and test yourself with a quiz.
 
-It's based on Martin & Alex's Czech phrasebook (the Czech-List repo): same app, Italian phrases, and a Roman look of travertine stone, terracotta and Roman numerals. There's no build step and nothing to install (only the optional audio script needs Node 18+).
+It's based on Martin & Alex's Czech phrasebook (the Czech-List repo): same app, Italian phrases, designed with taste-skill v2.1.5 (the version used for the Czech app): a two-colour print of cobalt on sand, with the phrases set like a trattoria menu and the how-to as a bar receipt (scontrino). There's no build step and nothing to install (only the optional audio script needs Node 18+).
 
 | File | What it is |
 |---|---|
@@ -10,7 +10,8 @@ It's based on Martin & Alex's Czech phrasebook (the Czech-List repo): same app, 
 | `data.js` | The phrases |
 | `app.js` | App logic |
 | `audio/`, `tools/generate-audio.mjs` | Recordings (once generated) and the script that makes them |
-| `fonts/` | Hanken Grotesk and Cormorant Garamond (both OFL), bundled so they work offline |
+| `fonts/` | Schibsted Grotesk (OFL), bundled so it works offline |
+| `.taste-skill/direction.json` | The design brief dealt by taste-skill v2.1.5, the same version used for the Czech app |
 | `sw.js`, `manifest.webmanifest`, `icons/` | Offline support and "Add to Home Screen" |
 
 ## Run it
