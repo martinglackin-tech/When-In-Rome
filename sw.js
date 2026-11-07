@@ -1,8 +1,8 @@
 // Offline support. Bump CACHE when the list of files changes.
-const CACHE = 'wir-v2';
+const CACHE = 'wir-v1';
 // Filled by app.js (loadRecordings); listed here so activate doesn't delete it.
 const AUDIO_CACHE = 'wir-audio-v1';
-const FILES = ['./', 'index.html', 'data.js', 'app.js', 'manifest.webmanifest', 'icons/icon.svg', 'fonts/schibsted-grotesk-latin-400-normal.woff2', 'fonts/schibsted-grotesk-latin-600-normal.woff2', 'fonts/schibsted-grotesk-latin-800-normal.woff2'];
+const FILES = ['./', 'index.html', 'data.js', 'app.js', 'manifest.webmanifest', 'icons/icon.svg', 'fonts/hanken-400.ttf', 'fonts/hanken-500.ttf', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/cormorant-garamond-latin-600-normal.woff2'];
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
