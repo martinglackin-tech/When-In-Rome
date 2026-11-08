@@ -1,5 +1,5 @@
 // Offline support. Bump CACHE when the list of files changes.
-const CACHE = 'wir-v1';
+const CACHE = 'wir-v2';
 // Filled by app.js (loadRecordings); listed here so activate doesn't delete it.
 const AUDIO_CACHE = 'wir-audio-v1';
 const FILES = ['./', 'index.html', 'data.js', 'app.js', 'manifest.webmanifest', 'icons/icon.svg', 'fonts/hanken-400.ttf', 'fonts/hanken-500.ttf', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/cormorant-garamond-latin-600-normal.woff2'];
@@ -12,10 +12,11 @@ self.addEventListener('install', (event) => {
     );
 });
 
+// Cache Storage is shared by every app on this origin, so only delete this app's own old caches.
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
-            .then(keys => Promise.all(keys.filter(k => k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k))))
+            .then(keys => Promise.all(keys.filter(k => k.startsWith('wir-') && k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k))))
             .then(() => self.clients.claim())
     );
 });
